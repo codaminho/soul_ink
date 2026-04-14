@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Ink Studios — Si Buscas Perfección</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --smoke: #141414;
+  --ash: #1e1e1e;
+  --bone: #f0ebe3;
+  --cream: #e8e0d4;
+  --gold: #c9a84c;
+  --gold-dim: #8a6f2e;
+  --red: #c0392b;
+  --text: #d4cfc8;
+  --muted: #7a756e;
+  --radius: 4px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 1000;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 64px;
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .1em; color: var(--bone); }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold); color: var(--ink); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 20px; border: none; cursor: pointer; border-radius: var(--radius); transition: background .2s; }
+.nav-cta:hover { background: var(--cream); }
+.nav-admin-btn { background: transparent; border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 7px 14px; cursor: pointer; border-radius: var(--radius); margin-left: .75rem; transition: all .2s; }
+.nav-admin-btn:hover { background: rgba(201,168,76,0.1); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 2rem;
+  background: radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.015) 60px),
+              repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.015) 60px);
+}
+.hero-eyebrow { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 11rem); letter-spacing: -.01em; line-height: .9; color: var(--bone); }
+.hero h1 span { display: block; font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(1.5rem, 4vw, 3rem); letter-spacing: .05em; color: var(--gold); margin-top: .5rem; }
+.hero-sub { margin-top: 1.5rem; font-size: 14px; color: var(--muted); letter-spacing: .05em; }
+.hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
+.btn-primary { background: var(--gold); color: var(--ink); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 14px 32px; border: none; cursor: pointer; border-radius: var(--radius); transition: all .2s; }
+.btn-primary:hover { background: var(--bone); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--bone); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; padding: 14px 32px; border: 1px solid rgba(240,235,227,0.3); cursor: pointer; border-radius: var(--radius); transition: all .2s; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; animation: bounce 2s infinite; }
+.hero-scroll::after { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); }
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(4px); } }
+
+/* SERVICES */
+.section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--bone); line-height: 1; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; margin-top: 3rem; background: rgba(201,168,76,0.15); }
+.service-card { background: var(--smoke); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background .3s; }
+.service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity .3s; }
+.service-card:hover { background: var(--ash); }
+.service-card:hover::before { opacity: 1; }
+.service-icon { font-size: 2rem; margin-bottom: 1rem; }
+.service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--bone); letter-spacing: .05em; margin-bottom: .75rem; }
+.service-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.service-price { margin-top: 1.5rem; font-size: 12px; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; }
+
+/* GALLERY */
+.gallery-section { background: var(--smoke); padding: 6rem 2rem; }
+.gallery-inner { max-width: 1100px; margin: 0 auto; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 3rem; }
+.gallery-item { position: relative; overflow: hidden; aspect-ratio: 1; background: var(--ash); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; filter: saturate(0.7); }
+.gallery-item:hover img { transform: scale(1.05); filter: saturate(1); }
+.gallery-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 50%); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 1.25rem; }
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-overlay h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--bone); letter-spacing: .05em; }
+.gallery-item-overlay p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.gallery-item.featured { grid-column: span 2; }
+
+/* BOOKING SECTION */
+.booking-section { padding: 6rem 2rem; background: var(--ink); position: relative; }
+.booking-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); }
+.booking-inner { max-width: 700px; margin: 0 auto; }
+.booking-tabs { display: flex; gap: 0; margin-top: 2.5rem; border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius); overflow: hidden; }
+.booking-tab { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+.booking-tab.active { background: var(--gold); color: var(--ink); font-weight: 500; }
+.booking-form { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.form-group input, .form-group select, .form-group textarea {
+  background: var(--smoke); border: 1px solid rgba(201,168,76,0.2); color: var(--bone);
+  padding: 11px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+  border-radius: var(--radius); outline: none; transition: border-color .2s; width: 100%;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group select option { background: var(--smoke); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.booking-submit { margin-top: .5rem; }
+.booking-note { margin-top: 1rem; font-size: 12px; color: var(--muted); text-align: center; }
+.booking-success { display: none; text-align: center; padding: 3rem; background: var(--smoke); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius); }
+.booking-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: .05em; }
+.booking-success p { color: var(--muted); margin-top: .5rem; font-size: 14px; }
+
+/* CONTACT */
+.contact-section { background: var(--smoke); padding: 5rem 2rem; text-align: center; }
+.contact-inner { max-width: 600px; margin: 0 auto; }
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+.contact-link { display: flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+.contact-link:hover { color: var(--gold); }
+
+/* FOOTER */
+footer { background: var(--ink); border-top: 1px solid rgba(201,168,76,0.1); padding: 2rem; text-align: center; font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+
+/* ---- ADMIN OVERLAY ---- */
+.admin-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+}
+.admin-overlay.open { display: flex; }
+.admin-panel {
+  background: var(--smoke); width: 100%; max-width: 1000px; margin: auto;
+  max-height: 90vh; overflow-y: auto; border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 8px; position: relative;
+}
+.admin-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 2rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+  position: sticky; top: 0; background: var(--smoke); z-index: 10;
+}
+.admin-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: .05em; }
+.admin-close { background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; padding: 4px 10px; line-height: 1; }
+.admin-close:hover { color: var(--bone); }
+.admin-login { padding: 3rem 2rem; max-width: 360px; margin: 0 auto; }
+.admin-login h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--bone); margin-bottom: 1.5rem; letter-spacing: .05em; text-align: center; }
+.admin-login .form-group { margin-bottom: 1rem; }
+.admin-content { display: none; padding: 1.5rem 2rem 2rem; }
+.admin-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.06); padding-bottom: .75rem; }
+.admin-tab { background: none; border: none; color: var(--muted); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; padding: 6px 14px; border-radius: var(--radius); transition: all .2s; }
+.admin-tab.active { background: rgba(201,168,76,0.15); color: var(--gold); }
+.admin-tab:hover { color: var(--bone); }
+.admin-view { display: none; }
+.admin-view.active { display: block; }
+
+/* Appointments Table */
+.appt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.appt-table th { text-align: left; padding: 10px 12px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,.06); }
+.appt-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle; }
+.appt-table tr:hover td { background: rgba(255,255,255,.02); }
+.badge { display: inline-block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+.badge-pending { background: rgba(201,168,76,0.15); color: var(--gold); }
+.badge-confirmed { background: rgba(39,174,96,0.15); color: #2ecc71; }
+.badge-cancelled { background: rgba(192,57,43,0.15); color: #e74c3c; }
+.badge-tattoo { background: rgba(142,68,173,0.15); color: #9b59b6; }
+.badge-hair { background: rgba(41,128,185,0.15); color: #3498db; }
+.appt-actions { display: flex; gap: 6px; }
+.appt-btn { background: none; border: 1px solid rgba(255,255,255,.1); color: var(--muted); font-size: 11px; padding: 4px 10px; border-radius: 3px; cursor: pointer; transition: all .15s; }
+.appt-btn:hover { border-color: var(--gold); color: var(--gold); }
+.appt-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-box { background: var(--ash); border: 1px solid rgba(255,255,255,.05); border-radius: 6px; padding: 1.25rem; }
+.stat-box .val { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--bone); letter-spacing: .02em; }
+.stat-box .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-top: 2px; }
+.stat-box.gold-accent { border-color: rgba(201,168,76,0.3); }
+.stat-box.gold-accent .val { color: var(--gold); }
+
+/* Filter bar */
+.filter-bar { display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.filter-select { background: var(--ash); border: 1px solid rgba(255,255,255,.08); color: var(--text); padding: 7px 12px; font-size: 12px; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; }
+.filter-input { background: var(--ash); border: 1px solid rgba(255,255,255,.08); color: var(--text); padding: 7px 12px; font-size: 12px; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; flex: 1; min-width: 160px; outline: none; }
+.filter-input:focus, .filter-select:focus { border-color: rgba(201,168,76,0.4); outline: none; }
+
+/* Toast */
+.toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--gold); color: var(--ink); padding: 12px 20px; border-radius: 4px; font-size: 13px; font-weight: 500; z-index: 9999; transform: translateY(60px); opacity: 0; transition: all .3s; }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Admin form */
+.admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.admin-form-grid .full { grid-column: span 2; }
+
+/* Calendar mini */
+.calendar-mini { background: var(--ash); border: 1px solid rgba(255,255,255,.05); border-radius: 6px; padding: 1rem; }
+.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+.cal-header span { font-size: 14px; font-weight: 500; color: var(--bone); }
+.cal-nav { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; padding: 4px 8px; }
+.cal-nav:hover { color: var(--gold); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal-day-name { text-align: center; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; padding: 4px 0; }
+.cal-day { text-align: center; padding: 6px 2px; font-size: 12px; color: var(--muted); cursor: pointer; border-radius: 3px; transition: all .15s; }
+.cal-day:hover { background: rgba(201,168,76,0.15); color: var(--gold); }
+.cal-day.today { color: var(--gold); font-weight: 500; }
+.cal-day.has-appt { position: relative; color: var(--bone); }
+.cal-day.has-appt::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+.cal-day.empty { cursor: default; }
+.cal-day.selected { background: var(--gold); color: var(--ink); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item.featured { grid-column: span 2; }
+  .form-row { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .admin-form-grid { grid-template-columns: 1fr; }
+  .admin-form-grid .full { grid-column: span 1; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Soul <span>Ink</span> Studios</div>
+  <div class="nav-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#galeria">Galería</a>
+    <a href="#reservar">Reservar</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.5rem;">
+    <button class="nav-cta" onclick="scrollTo('#reservar')">Agendar cita</button>
+    <button class="nav-admin-btn" onclick="openAdmin()">Admin ⚙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div style="position:relative;z-index:1;">
+    <p class="hero-eyebrow">Guillermo Morales — Hidalgo del Parral, México</p>
+    <h1>Soul Ink<span>Si Buscas Perfección</span></h1>
+    <p class="hero-sub">Tattoo · Piercing · Barbería & Estilismo</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollTo('#reservar')">Reservar cita</button>
+      <button class="btn-outline" onclick="scrollTo('#galeria')">Ver galería</button>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section" id="servicios">
+  <p class="section-label">Lo que hacemos</p>
+  <h2 class="section-title">Servicios</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🖋</div>
+      <h3>Tatuajes</h3>
+      <p>Diseños personalizados, flash sessions, linea fina, blackwork, color y retoques. Cada pieza es única y diseñada con libertad creativa.</p>
+      <div class="service-price">Desde $800 MXN · Consulta gratuita</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💈</div>
+      <h3>Barbería</h3>
+      <p>Cortes clásicos y modernos, arreglo de barba, afeitado a navaja, tratamientos capilares. Estilo que define tu personalidad.</p>
+      <div class="service-price">Desde $150 MXN · Sin cita disponible</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Estilismo</h3>
+      <p>Coloración, mechas, keratina, cortes para todos los géneros. Transformaciones completas con productos de primera calidad.</p>
+      <div class="service-price">Desde $300 MXN · Cita previa</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💎</div>
+      <h3>Piercing</h3>
+      <p>Perforaciones profesionales con joyería de titanio implant-grade. Oreja, nariz, labio, tragus, helix y más.</p>
+      <div class="service-price">Desde $350 MXN incl. joyería</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="gallery-section" id="galeria">
+  <div class="gallery-inner">
+    <p class="section-label">Nuestro trabajo</p>
+    <h2 class="section-title">Galería</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item featured">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t51.71878-15/619657201_771092238719488_6308603377933808127_n.jpg?stp=c0.249.640.640a_dst-jpg_e15_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=fNyA5IdPOpIQ7kNvwGiQhVL&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfyXNkPHN_hQc41BZtRlpD00vOtFzxhopz8F-H5aPVcqnw&oe=69B1193D&_nc_sid=8b3546" alt="Proyecto completo" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Proyecto completo</h4><p>Proyecto de más de 2 años con libertad creativa</p></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t51.82787-15/612663558_18413030572186802_4149880888946518036_n.jpg?stp=c0.237.610.610a_dst-jpg_e15_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=102&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=WsTmXBJw6vsQ7kNvwGvn8AH&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfyERIMhxiQNvws213_VGKRpBCbWkkxm3eo3FExYcPP2jA&oe=69B12128&_nc_sid=8b3546" alt="Flor del Infierno" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Flor del Infierno</h4><p>Lirios araña rojos con líneas abstractas</p></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t15.5256-10/616074792_1457489239331973_4352312594922850685_n.jpg?stp=c0.280.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=TZ4c2CuHm44Q7kNvwHnNE8M&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Afzog_p4oIasbh1etY4eudSO9r9YTXXnyx0CjEGJARbM0Q&oe=69B11A02&_nc_sid=8b3546" alt="Soul Ink Studios" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Soul Ink Studio's</h4><p>Otro día en el estudio</p></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t15.5256-10/631405255_851936021198023_2657137489967577917_n.jpg?stp=c0.422.1076.1076a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=107&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=pEEE1URXy3EQ7kNvwFVLx6M&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Afyu8kFV5L8i3QO_l_8UqiK-oz2E4ws9DRwHAoQgqGeRZQ&oe=69B13756&_nc_sid=8b3546" alt="Baúl de Recuerdos" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Baúl de Recuerdos</h4><p>5 años de estas piezas del baúl</p></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t15.5256-10/628632595_25995968043370224_6043588131285018280_n.jpg?stp=c0.280.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=5kdVD75ZDZUQ7kNvwHq8Qze&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxLd90txjKNzYmxj1iZZ3Y7WVi3Xqhl9ueFStbKlvOqJQ&oe=69B1356B&_nc_sid=8b3546" alt="Dragon Ball" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Dragon Ball</h4><p>Coleccionista · línea fina</p></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-phx1-1.cdninstagram.com/v/t15.5256-10/608354817_2057790228375496_7717203589262957434_n.jpg?stp=c0.280.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-phx1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QFKoLD2I3EzdunimC1nQp7_b2CHvs-R5dpB81pRUFWJbLfe2X4locLNpP4IlNWR5tg&_nc_ohc=nAOox0gEzCUQ7kNvwFRbfzT&_nc_gid=U86q8XOhK6RZa_0JYwJ3lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfyYshGJFwFdOPCvGyVh2QGtY0b2uiKZ-MDOfaXNWidV8g&oe=69B11A6C&_nc_sid=8b3546" alt="Colores Vivos" loading="lazy">
+        <div class="gallery-item-overlay"><div><h4>Colores Vivos</h4><p>Afilando el colmillo</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="reservar">
+  <div class="booking-inner">
+    <p class="section-label">Agenda tu cita</p>
+    <h2 class="section-title">Reservaciones</h2>
+    <div class="booking-tabs">
+      <button class="booking-tab active" onclick="setTab(this,'tattoo')">🖋 Tatuaje / Piercing</button>
+      <button class="booking-tab" onclick="setTab(this,'hair')">💈 Barbería / Estilismo</button>
+    </div>
+    <div id="booking-form-wrap">
+      <form class="booking-form" onsubmit="submitBooking(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre completo *</label>
+            <input type="text" id="b-name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp *</label>
+            <input type="tel" id="b-phone" placeholder="+52 xxx xxx xxxx" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fecha deseada *</label>
+            <input type="date" id="b-date" required>
+          </div>
+          <div class="form-group">
+            <label>Hora preferida *</label>
+            <select id="b-time" required>
+              <option value="">Seleccionar...</option>
+              <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+              <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+              <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" id="service-group">
+          <label>Servicio *</label>
+          <select id="b-service" required>
+            <option value="">Seleccionar...</option>
+            <option>Tatuaje — Diseño personalizado</option>
+            <option>Tatuaje — Flash session</option>
+            <option>Tatuaje — Retoque</option>
+            <option>Piercing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Descripción / Referencia</label>
+          <textarea id="b-desc" placeholder="Cuéntanos sobre tu diseño, zona del cuerpo, tamaño aproximado o cualquier detalle relevante..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary booking-submit">Enviar solicitud →</button>
+        <p class="booking-note">Te contactaremos en menos de 24 hrs para confirmar. Sin anticipo por ahora.</p>
+      </form>
+    </div>
+    <div class="booking-success" id="booking-success">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">✓</div>
+      <h3>¡Solicitud enviada!</h3>
+      <p>Guillermo te contactará pronto por WhatsApp para confirmar tu cita.</p>
+      <button class="btn-outline" style="margin-top:1.5rem;" onclick="resetBooking()">Hacer otra reserva</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="contact-inner">
+    <p class="section-label">Encuéntranos</p>
+    <h2 class="section-title" style="font-size:2.5rem;">Contacto</h2>
+    <p style="margin-top:1rem;color:var(--muted);font-size:14px;">Hidalgo del Parral, Chihuahua — México</p>
+    <div class="contact-links">
+      <a href="https://wa.me/526481001205" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +52 648 100 1205
+      </a>
+      <a href="https://instagram.com/guiillermomo" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @guiillermomo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>SOUL INK STUDIOS — Si Buscas Perfección</p>
+  <p style="margin-top:.5rem;">© 2026 Soul Ink Studios · Hidalgo del Parral, Chihuahua</p>
+  <p style="margin-top:.25rem;font-size:11px;color:#3a3530;">Beta v0.1 — Gestión de citas habilitada</p>
+</footer>
+
+<!-- ===== ADMIN OVERLAY ===== -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>Admin — Soul Ink Studios</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="admin-login" id="adminLogin">
+      <h3>Acceso administrador</h3>
+      <div class="form-group"><label>Usuario</label><input type="text" id="admin-user" placeholder="admin"></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" id="admin-pass" placeholder="••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doLogin()">Entrar →</button>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:1rem;">Demo: admin / admin123</p>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content" id="adminContent">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab(this,'dashboard')">Dashboard</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'appointments')">Citas</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'calendar')">Calendario</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'new-appt')">Nueva cita</button>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="admin-view active" id="view-dashboard">
+        <div class="stats-grid">
+          <div class="stat-box gold-accent"><div class="val" id="stat-total">0</div><div class="lbl">Total citas</div></div>
+          <div class="stat-box"><div class="val" id="stat-pending" style="color:#c9a84c;">0</div><div class="lbl">Pendientes</div></div>
+          <div class="stat-box"><div class="val" id="stat-confirmed" style="color:#2ecc71;">0</div><div class="lbl">Confirmadas</div></div>
+          <div class="stat-box"><div class="val" id="stat-today">0</div><div class="lbl">Hoy</div></div>
+        </div>
+        <div style="background:var(--ash);border-radius:6px;padding:1.25rem;">
+          <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;">Próximas citas</p>
+          <div id="upcoming-list"></div>
+        </div>
+      </div>
+
+      <!-- CITAS -->
+      <div class="admin-view" id="view-appointments">
+        <div class="filter-bar">
+          <input class="filter-input" id="search-appt" placeholder="Buscar por nombre o teléfono..." oninput="renderTable()">
+          <select class="filter-select" id="filter-type" onchange="renderTable()">
+            <option value="">Todos los servicios</option>
+            <option value="tattoo">Tatuaje / Piercing</option>
+            <option value="hair">Barbería / Estilismo</option>
+          </select>
+          <select class="filter-select" id="filter-status" onchange="renderTable()">
+            <option value="">Todos los estados</option>
+            <option value="pending">Pendiente</option>
+            <option value="confirmed">Confirmada</option>
+            <option value="cancelled">Cancelada</option>
+          </select>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="appt-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Servicio</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="appt-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CALENDAR -->
+      <div class="admin-view" id="view-calendar">
+        <div style="display:grid;grid-template-columns:280px 1fr;gap:1.5rem;">
+          <div>
+            <div class="calendar-mini" id="calMini"></div>
+            <div style="margin-top:1rem;font-size:12px;color:var(--muted);">· Puntos dorados = citas agendadas</div>
+          </div>
+          <div>
+            <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;" id="cal-day-label">Selecciona un día</p>
+            <div id="cal-day-appts"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUEVA CITA -->
+      <div class="admin-view" id="view-new-appt">
+        <form class="admin-form-grid" onsubmit="addManualAppt(event)">
+          <div class="form-group"><label>Nombre *</label><input type="text" id="na-name" placeholder="Cliente" required></div>
+          <div class="form-group"><label>Teléfono *</label><input type="tel" id="na-phone" placeholder="+52..." required></div>
+          <div class="form-group"><label>Fecha *</label><input type="date" id="na-date" required></div>
+          <div class="form-group"><label>Hora *</label>
+            <select id="na-time" required>
+              <option value="">Hora...</option>
+              <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+              <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+              <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tipo</label>
+            <select id="na-type">
+              <option value="tattoo">Tatuaje / Piercing</option>
+              <option value="hair">Barbería / Estilismo</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Estado</label>
+            <select id="na-status">
+              <option value="pending">Pendiente</option>
+              <option value="confirmed">Confirmada</option>
+            </select>
+          </div>
+          <div class="form-group full"><label>Notas</label><textarea id="na-notes" placeholder="Descripción del servicio..."></textarea></div>
+          <div class="full"><button type="submit" class="btn-primary">Agregar cita →</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- DATA ----
+const today = new Date();
+const fmt = d => d.toISOString().split('T')[0];
+const todayStr = fmt(today);
+
+function daysFromNow(n) {
+  const d = new Date(today); d.setDate(d.getDate()+n); return fmt(d);
+}
+
+let appointments = [
+  { id:1, name:'Carlos Méndez', phone:'+52 614 123 4567', date: daysFromNow(1), time:'11:00 AM', type:'tattoo', service:'Tatuaje — Diseño personalizado', status:'confirmed', notes:'Manga completa, referencia enviada por IG' },
+  { id:2, name:'Sofía Ramos', phone:'+52 614 987 6543', date: daysFromNow(2), time:'3:00 PM', type:'hair', service:'Coloración — mechas', status:'pending', notes:'Mechas platinadas, cabello largo' },
+  { id:3, name:'Marco Ávila', phone:'+52 648 555 0101', date: daysFromNow(0), time:'10:00 AM', type:'tattoo', service:'Piercing', status:'confirmed', notes:'Helix oreja derecha' },
+  { id:4, name:'Valentina Cruz', phone:'+52 614 200 3344', date: daysFromNow(3), time:'2:00 PM', type:'tattoo', service:'Tatuaje — Flash session', status:'pending', notes:'Diseño pequeño, muñeca' },
+  { id:5, name:'Rodrigo Peña', phone:'+52 648 777 8899', date: daysFromNow(0), time:'4:00 PM', type:'hair', service:'Corte + barba', status:'confirmed', notes:'' },
+  { id:6, name:'Andrea López', phone:'+52 614 333 2211', date: daysFromNow(5), time:'1:00 PM', type:'tattoo', service:'Tatuaje — Retoque', status:'cancelled', notes:'Retoque en tatuaje de hace 1 año' },
+];
+let nextId = 7;
+
+// Booking tab state
+let activeBookingType = 'tattoo';
+const hairServices = ['Corte de cabello','Arreglo de barba','Coloración','Mechas / Highlights','Keratina','Corte + barba'];
+const tattooServices = ['Tatuaje — Diseño personalizado','Tatuaje — Flash session','Tatuaje — Retoque','Piercing'];
+
+function setTab(btn, type) {
+  document.querySelectorAll('.booking-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeBookingType = type;
+  const sel = document.getElementById('b-service');
+  sel.innerHTML = '<option value="">Seleccionar...</option>';
+  const svcs = type === 'hair' ? hairServices : tattooServices;
+  svcs.forEach(s => { const o = document.createElement('option'); o.text = s; sel.appendChild(o); });
+}
+
+function submitBooking(e) {
+  e.preventDefault();
+  const appt = {
+    id: nextId++,
+    name: document.getElementById('b-name').value,
+    phone: document.getElementById('b-phone').value,
+    date: document.getElementById('b-date').value,
+    time: document.getElementById('b-time').value,
+    type: activeBookingType,
+    service: document.getElementById('b-service').value,
+    status: 'pending',
+    notes: document.getElementById('b-desc').value
+  };
+  appointments.push(appt);
+  document.getElementById('booking-form-wrap').style.display = 'none';
+  document.getElementById('booking-success').style.display = 'block';
+  updateStats();
+}
+
+function resetBooking() {
+  document.getElementById('booking-form-wrap').style.display = 'block';
+  document.getElementById('booking-success').style.display = 'none';
+  document.querySelector('.booking-form').reset();
+}
+
+function scrollTo(sel) {
+  document.querySelector(sel).scrollIntoView({behavior:'smooth'});
+}
+
+// ---- ADMIN ----
+let isLoggedIn = false;
+function openAdmin() {
+  document.getElementById('adminOverlay').classList.add('open');
+  if(isLoggedIn) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    updateStats(); renderTable(); renderCalendar(); renderUpcoming();
+  }
+}
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
+document.getElementById('adminOverlay').addEventListener('click', e => { if(e.target===document.getElementById('adminOverlay')) closeAdmin(); });
+
+function doLogin() {
+  const u = document.getElementById('admin-user').value;
+  const p = document.getElementById('admin-pass').value;
+  if(u === 'admin' && p === 'admin123') {
+    isLoggedIn = true;
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    updateStats(); renderTable(); renderCalendar(); renderUpcoming();
+    toast('Bienvenido, Guillermo 👋');
+  } else {
+    toast('Credenciales incorrectas'); 
+  }
+}
+
+function switchAdminTab(btn, view) {
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.admin-view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  if(view==='appointments') renderTable();
+  if(view==='calendar') renderCalendar();
+  if(view==='dashboard') { updateStats(); renderUpcoming(); }
+}
+
+function updateStats() {
+  document.getElementById('stat-total').textContent = appointments.length;
+  document.getElementById('stat-pending').textContent = appointments.filter(a=>a.status==='pending').length;
+  document.getElementById('stat-confirmed').textContent = appointments.filter(a=>a.status==='confirmed').length;
+  document.getElementById('stat-today').textContent = appointments.filter(a=>a.date===todayStr).length;
+}
+
+function renderUpcoming() {
+  const sorted = [...appointments].filter(a=>a.status!=='cancelled'&&a.date>=todayStr).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
+  const el = document.getElementById('upcoming-list');
+  if(!sorted.length){ el.innerHTML='<p style="color:var(--muted);font-size:13px;">Sin citas próximas</p>'; return; }
+  el.innerHTML = sorted.map(a => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+      <div>
+        <p style="font-size:14px;color:var(--bone);font-weight:500;">${a.name}</p>
+        <p style="font-size:12px;color:var(--muted);">${a.service}</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:12px;color:var(--gold);">${formatDate(a.date)}</p>
+        <p style="font-size:12px;color:var(--muted);">${a.time}</p>
+      </div>
+    </div>`).join('');
+}
+
+function formatDate(d) {
+  if(!d) return '';
+  const [y,m,day] = d.split('-');
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
+}
+
+function renderTable() {
+  const search = (document.getElementById('search-appt')||{value:''}).value.toLowerCase();
+  const typeF = (document.getElementById('filter-type')||{value:''}).value;
+  const statusF = (document.getElementById('filter-status')||{value:''}).value;
+  let data = appointments.filter(a => {
+    if(search && !a.name.toLowerCase().includes(search) && !a.phone.includes(search)) return false;
+    if(typeF && a.type !== typeF) return false;
+    if(statusF && a.status !== statusF) return false;
+    return true;
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+  const tbody = document.getElementById('appt-tbody');
+  tbody.innerHTML = data.map(a => `
+    <tr>
+      <td>
+        <p style="color:var(--bone);font-weight:500;">${a.name}</p>
+        <p style="font-size:12px;color:var(--muted);">${a.phone}</p>
+      </td>
+      <td>
+        <span class="badge badge-${a.type}">${a.type==='tattoo'?'Tattoo':'Cabello'}</span>
+        <p style="font-size:12px;color:var(--muted);margin-top:3px;">${a.service}</p>
+      </td>
+      <td>${formatDate(a.date)}</td>
+      <td>${a.time}</td>
+      <td><span class="badge badge-${a.status}">${{pending:'Pendiente',confirmed:'Confirmada',cancelled:'Cancelada'}[a.status]}</span></td>
+      <td>
+        <div class="appt-actions">
+          ${a.status==='pending'?`<button class="appt-btn" onclick="changeStatus(${a.id},'confirmed')">✓ Confirmar</button>`:''}
+          ${a.status!=='cancelled'?`<button class="appt-btn danger" onclick="changeStatus(${a.id},'cancelled')">✕ Cancelar</button>`:''}
+          <button class="appt-btn danger" onclick="deleteAppt(${a.id})">🗑</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function changeStatus(id, status) {
+  const a = appointments.find(x=>x.id===id);
+  if(a){ a.status=status; renderTable(); updateStats(); renderUpcoming(); toast('Estado actualizado'); }
+}
+
+function deleteAppt(id) {
+  appointments = appointments.filter(x=>x.id!==id);
+  renderTable(); updateStats(); renderUpcoming(); renderCalendar(); toast('Cita eliminada');
+}
+
+// Calendar
+let calYear = today.getFullYear(), calMonth = today.getMonth();
+function renderCalendar() {
+  const days = ['D','L','M','Mi','J','V','S'];
+  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const apptDates = new Set(appointments.map(a=>a.date));
+  let html = `<div class="cal-header">
+    <button class="cal-nav" onclick="changeCalMonth(-1)">‹</button>
+    <span>${months[calMonth]} ${calYear}</span>
+    <button class="cal-nav" onclick="changeCalMonth(1)">›</button>
+  </div>
+  <div class="cal-grid">
+    ${days.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}
+    ${Array(firstDay).fill('<div class="cal-day empty"></div>').join('')}
+    ${Array.from({length:daysInMonth},(_,i)=>{
+      const d = i+1;
+      const ds = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const cls = ['cal-day', ds===todayStr?'today':'', apptDates.has(ds)?'has-appt':''].filter(Boolean).join(' ');
+      return `<div class="${cls}" onclick="showDayAppts('${ds}')">${d}</div>`;
+    }).join('')}
+  </div>`;
+  document.getElementById('calMini').innerHTML = html;
+}
+
+function changeCalMonth(dir) { calMonth+=dir; if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
+
+function showDayAppts(ds) {
+  document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
+  event.target.classList.add('selected');
+  const dayAppts = appointments.filter(a=>a.date===ds);
+  document.getElementById('cal-day-label').textContent = formatDate(ds) || 'Sin fecha';
+  const el = document.getElementById('cal-day-appts');
+  if(!dayAppts.length){ el.innerHTML='<p style="color:var(--muted);font-size:13px;">Sin citas este día.</p>'; return; }
+  el.innerHTML = dayAppts.map(a=>`
+    <div style="background:var(--ash);border-radius:6px;padding:1rem;margin-bottom:.75rem;border-left:2px solid ${a.type==='tattoo'?'#9b59b6':'#3498db'};">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <p style="font-weight:500;color:var(--bone);">${a.name}</p>
+          <p style="font-size:12px;color:var(--muted);">${a.service}</p>
+          ${a.notes?`<p style="font-size:12px;color:var(--muted);margin-top:4px;font-style:italic;">${a.notes}</p>`:''}
+        </div>
+        <div style="text-align:right;">
+          <p style="color:var(--gold);font-size:13px;">${a.time}</p>
+          <span class="badge badge-${a.status}" style="margin-top:4px;">${{pending:'Pendiente',confirmed:'Confirmada',cancelled:'Cancelada'}[a.status]}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function addManualAppt(e) {
+  e.preventDefault();
+  appointments.push({
+    id: nextId++,
+    name: document.getElementById('na-name').value,
+    phone: document.getElementById('na-phone').value,
+    date: document.getElementById('na-date').value,
+    time: document.getElementById('na-time').value,
+    type: document.getElementById('na-type').value,
+    service: document.getElementById('na-type').value === 'tattoo' ? 'Tatuaje personalizado' : 'Servicio de cabello',
+    status: document.getElementById('na-status').value,
+    notes: document.getElementById('na-notes').value
+  });
+  e.target.reset();
+  updateStats(); renderTable(); renderCalendar(); renderUpcoming();
+  toast('Cita agregada correctamente ✓');
+  switchAdminTab(document.querySelectorAll('.admin-tab')[1], 'appointments');
+  document.querySelectorAll('.admin-tab').forEach((b,i)=>b.classList.toggle('active',i===1));
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// Set min date on booking form
+document.getElementById('b-date').min = todayStr;
+
+// Initialize tab
+setTab(document.querySelector('.booking-tab'), 'tattoo');
+</script>
+</body>
+</html>
